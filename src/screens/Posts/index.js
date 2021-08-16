@@ -8,14 +8,14 @@ import {
   Text,
   StatusBar,
 } from "react-native";
+import { useQuery, useMutation } from "react-query";
+
 import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
 import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
 import generateId from "../../utils/generateId";
-// mock data
-import data from "./data.json";
-const DATA = data.data;
+import { usePostsData } from "../../utils/api";
 
 const renderItem = ({ item }) => (
   <Card
@@ -25,58 +25,17 @@ const renderItem = ({ item }) => (
   />
 );
 
-const Posts = ({route}) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState([]);
+const Posts = ({ route }) => {
+  const { data, error, isFetching } = usePostsData(route.params.category);
 
-  const getData = async () => {
-    // use mock data
-    /*
-    setLoading(true);
-    setTimeout(() => {
-      setError('ERror');
-      setLoading(false);
-    }, 1000);
-    */    
-    
-    try {
-     
-      setLoading(true);
-      const res = await fetch(
-        `http://api.mediastack.com/v1/news?access_key=${process.env.API_KEY}&categories=${route.params.category}&languages=en`
-      );
-      if (!res.ok) { // throw error if status not OK
-        throw Error(res?.errors || 'Some error');
-      }
-
-      const { data } = await res.json();
-      setLoading(false);
-      setData(data);
-      
-    } catch (_error) {
-      console.log("error", _error);
-      setLoading(false);
-      setError("Some Error Happen");
-    }
-    
-    
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  if (loading) return <Loading />;
-  if (error) return <Toast text="some error happen"/>;
+  if (isFetching) return <Loading />;
+  if (error) return <Toast text="some error happen" />;
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) =>
-          generateId(item)
-        }
+        keyExtractor={(item) => generateId(item)}
       />
     </SafeAreaView>
   );
