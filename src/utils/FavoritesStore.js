@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
+import generateId from "./generateId";
 const FAVORITES_KEY = "@my-favorite-news";
 
 export const getValuesFromStore = async () => {
@@ -35,8 +36,8 @@ export const saveValueToStore = async (item) => {
      const itemsFromStore = await AsyncStorage.getItem(FAVORITES_KEY);
      const items = itemsFromStore ? JSON.parse(itemsFromStore) : [];
      // generate ID
-     const newID = item.title.replace(/\s/g, "-");
-     // prevent saving sane article again
+     const newID = generateId(item);
+     // prevent saving same article again
      if (items?.find(({id}) => id === newID)) {
          Alert.alert('Data Exists');
          return;

@@ -12,6 +12,7 @@ import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
 import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
+import generateId from "../../utils/generateId";
 // mock data
 import data from "./data.json";
 const DATA = data.data;
@@ -74,7 +75,7 @@ const Posts = ({route}) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) =>
-          `${item.published_at}-${item.title.replace(/\s/g, "-")}`
+          generateId(item)
         }
       />
     </SafeAreaView>
