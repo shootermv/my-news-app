@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
+import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
 // mock data
 import data from "./data.json";
@@ -33,10 +34,10 @@ const Posts = ({route}) => {
     /*
     setLoading(true);
     setTimeout(() => {
-      setData(DATA);
+      setError('ERror');
       setLoading(false);
     }, 1000);
-    */
+    */    
     
     try {
      
@@ -58,6 +59,7 @@ const Posts = ({route}) => {
       setError("Some Error Happen");
     }
     
+    
   };
 
   useEffect(() => {
@@ -65,7 +67,7 @@ const Posts = ({route}) => {
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <Text>some error happen</Text>;
+  if (error) return <Toast text="some error happen"/>;
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
