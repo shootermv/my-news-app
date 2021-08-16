@@ -1,5 +1,5 @@
-# my-news-app
-react native mobile news app
+## my-news-app
+A cross platform (iOS and Android) React Native news app
 # About This Project
 This project purpose was a tech assignment for one of companies i applyed to
 
@@ -8,10 +8,17 @@ This project purpose was a tech assignment for one of companies i applyed to
 # Tech Stack
 React-Native  
 Expo - Why Expo? - Beacuse i wanted to play with this interesting tool  
+Yarn -  because of popular song "forever yarn"
 
-# How To Run
-you need to have android studio or xcode installed on your machine  
-```yarn add -g expo-cli```  
+### Installation
+you need to have android studio or xcode installed on your machine 
+- `git clone https://github.com/shootermv/my-news-app.git`
+- `yarn install`
+- `(cd ios && pod install)`
+- `yarn add -g expo-cli`
+### How To Run
+run the project on your device 
 ```yarn android``` or ```yarn ios```
 
-# Basic Look
+# Basic Look Of Screens
+![Image of Screens](https://raw.githubusercontent.com/shootermv/my-news-app/main/screens.png)
