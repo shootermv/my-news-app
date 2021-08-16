@@ -7,31 +7,23 @@ import {
   StyleSheet,
   Text,
   StatusBar,
-  ActivityIndicator,
-  Alert,
 } from "react-native";
+import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
 import { saveValueToStore } from "../../utils/FavoritesStore";
 // mock data
 import data from "./data.json";
 const DATA = data.data;
 
-
-
-const Item = ({ item }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{item.title}</Text>
-    <Button
-      title="Save to Favorites"
-      onPress={() => {
-        saveValueToStore(item);
-      }}
-    />
-  </View>
+const renderItem = ({ item }) => (
+  <Card
+    item={item}
+    onButtonPress={() => saveValueToStore(item)}
+    buttonText="Save to Favorites"
+  />
 );
-const Posts = ({ route, navigation }) => {
-  const renderItem = ({ item }) => <Item item={item} />;
 
+const Posts = ({route}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
@@ -39,12 +31,12 @@ const Posts = ({ route, navigation }) => {
   const getData = async () => {
     // use mock data
     /*
-    setLoading(true)
-    setTimeout(()=>{
-        setData(DATA)
-        setLoading(false)
-    }, 1000)
-    */    
+    setLoading(true);
+    setTimeout(() => {
+      setData(DATA);
+      setLoading(false);
+    }, 1000);
+    */
     
     try {
      
@@ -72,7 +64,7 @@ const Posts = ({ route, navigation }) => {
     getData();
   }, []);
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
   if (error) return <Text>some error happen</Text>;
   return (
     <SafeAreaView style={styles.container}>

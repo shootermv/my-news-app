@@ -12,6 +12,7 @@ import {
   Text,
   StatusBar,
 } from "react-native";
+import Card from "../../components/Card";
 
 const Item = ({ id, title, onItemRemoved }) => (
   <View style={styles.item}>
@@ -33,10 +34,19 @@ const Favorites = () => {
     getData();
   }, []);
 
-  const renderItem = ({ item }) => (
+  /*const renderItem = ({ item }) => (
     <Item id={item.id} title={item.title} onItemRemoved={getData} />
+  );*/
+  const renderItem = ({ item }) => (
+    <Card
+      item={item}
+      onButtonPress={async () => {
+        await removeValueFromStore(item.id);
+        getData()
+      }}
+      buttonText="Remove from Favorites"
+    />
   );
-
   return (
     <SafeAreaView style={styles.container}>
       <FlatList

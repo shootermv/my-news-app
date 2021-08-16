@@ -12,7 +12,7 @@ export const getValuesFromStore = async () => {
   }
 };
 
-export const removeValueFromStore = async (idToRemove, cb) => {
+export const removeValueFromStore = async (idToRemove) => {
   try {
     const itemsFromStore = await AsyncStorage.getItem(FAVORITES_KEY);
     const items = itemsFromStore ? JSON.parse(itemsFromStore) : [];
@@ -23,7 +23,7 @@ export const removeValueFromStore = async (idToRemove, cb) => {
       JSON.stringify(filteredItems)
     );
     Alert.alert("Item Removed");
-    cb();
+    return;
   } catch (error) {
     console.log(error);
     Alert.alert("Error When Trying To Remove Item");
