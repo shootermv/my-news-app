@@ -7,9 +7,10 @@ This project purpose was a tech assignment for one of companies i applyed to
 # Requirements
 ![Image of Requirements](https://raw.githubusercontent.com/shootermv/my-news-app/main/requirements.PNG)
 # Tech Stack
-* React-Native  - because it is cool
+* React-Native  - because it is cool (and also it was a requirement)
 * Expo - because i wanted to play with this interesting tool  
 * Yarn - because of popular song "forever yarn"
+* react-query -  because it makes code much shorter and readable
 
 ### Installation
 you need to have android studio or xcode installed on your machine 
