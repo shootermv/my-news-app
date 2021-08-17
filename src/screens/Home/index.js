@@ -1,10 +1,10 @@
 import * as React from "react";
 import {useContext} from "react";
-import { View, Button, StyleSheet, StatusBar, FlatList } from "react-native";
+import { View,  StyleSheet } from "react-native";
 import categories from "../../constants/categories";
 import { AuthContext } from "../../utils/AuthContext";
 
-import { Center, Box } from "native-base";
+import { Center, Button, FlatList} from "native-base";
 
 
 export default ({ navigation }) => {
@@ -12,11 +12,11 @@ export default ({ navigation }) => {
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Button
-        title={item.title}
+        
         onPress={() => {
           navigation.navigate("Posts", { category: item.id });
         }}
-      />
+      >{item.title}</Button>
     </View>
   );
 
@@ -29,9 +29,8 @@ export default ({ navigation }) => {
       />
    
       <Button
-        title="Go to Favorites"
         onPress={() => navigation.navigate(userToken ? "Favorites" : "SignIn")}
-      />
+      >Go to Favorites</Button>
     </Center>
   );
 };
