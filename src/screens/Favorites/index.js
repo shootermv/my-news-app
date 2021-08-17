@@ -5,24 +5,14 @@ import { getValuesFromStore, removeValueFromStore } from "../../utils/FavoritesS
 
 import {
   SafeAreaView,
-  View,
   FlatList,
-  Button,
   StyleSheet,
   Text,
   StatusBar,
 } from "react-native";
 import Card from "../../components/Card";
 
-const Item = ({ id, title, onItemRemoved }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-    <Button
-      title="Remove from Favorites"
-      onPress={() => removeValueFromStore(id, onItemRemoved)}
-    />
-  </View>
-);
+
 
 const Favorites = () => {
   const getData = async () => {
@@ -34,9 +24,7 @@ const Favorites = () => {
     getData();
   }, []);
 
-  /*const renderItem = ({ item }) => (
-    <Item id={item.id} title={item.title} onItemRemoved={getData} />
-  );*/
+
   const renderItem = ({ item }) => (
     <Card
       item={item}
