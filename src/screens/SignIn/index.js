@@ -1,18 +1,11 @@
 import * as React from "react";
-import {useContext} from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../utils/AuthContext";
-import {
-  View,
-  Button,
-  StyleSheet,
-  StatusBar,
-  FlatList,
-  Alert,
-} from "react-native";
+import { Button, Alert } from "react-native";
 import * as Facebook from "expo-facebook";
 
-export default ({ navigation }) => {
-  const {setUserToken} = useContext(AuthContext);
+export default () => {
+  const { setUserToken } = useContext(AuthContext);
   async function logIn() {
     try {
       await Facebook.initializeAsync({
@@ -28,7 +21,7 @@ export default ({ navigation }) => {
           `https://graph.facebook.com/me?access_token=${token}`
         );
         Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
-        setUserToken(token)
+        setUserToken(token);
       } else {
         Alert.alert("Some error when trying to log in");
       }

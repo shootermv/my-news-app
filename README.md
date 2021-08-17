@@ -19,6 +19,12 @@ you need to have android studio or xcode installed on your machine
 - `(cd ios && pod install)`
 - `yarn add -g expo-cli`
 ### How To Run
+create `.env` file at root directory  
+place following text at the file:  
+```  
+API_KEY=your-mediastack-key  
+FB_APP_KEY=your-fb-app-key  
+```  
 run the project on your device 
 ```yarn android``` or ```yarn ios```
 
