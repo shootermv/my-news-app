@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import categories from "../../constants/categories";
 import { AuthContext } from "../../utils/AuthContext";
 
-import { Center, Button, FlatList } from "native-base";
+import { Center, Button, FlatList, Heading } from "native-base";
 
 export default ({ navigation }) => {
   const { userToken } = useContext(AuthContext);
@@ -22,6 +22,7 @@ export default ({ navigation }) => {
 
   return (
     <Center flex={1}>
+      <Heading marginTop="4">Categories</Heading>
       <FlatList
         data={categories}
         renderItem={renderItem}

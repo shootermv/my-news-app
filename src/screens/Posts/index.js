@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  Button,
-  View,
-  FlatList,
-  StyleSheet,
-  Text,
-  StatusBar,
-} from "react-native";
-import { useQuery, useMutation } from "react-query";
+import React from "react";
+import { SafeAreaView, FlatList, StyleSheet, StatusBar } from "react-native";
+import { Heading, Center } from "native-base";
 
 import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
@@ -32,6 +24,9 @@ const Posts = ({ route }) => {
   if (error) return <Toast text="some error happen" />;
   return (
     <SafeAreaView style={styles.container}>
+      <Center marginTop="4">
+        <Heading>{`Posts of "${route.params.category}" category`}</Heading>
+      </Center>
       <FlatList
         data={data}
         renderItem={renderItem}
