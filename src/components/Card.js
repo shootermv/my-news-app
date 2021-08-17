@@ -2,7 +2,7 @@ import React from "react";
 import {View, StyleSheet} from "react-native";
 import { Button, Icon , Text} from "native-base"
 import colors from "../constants/colors";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 const Card = ({ item, onButtonPress, buttonText = "" }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{item.title}</Text>
