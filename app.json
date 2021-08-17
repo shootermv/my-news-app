@@ -5,6 +5,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "facebookScheme": "fb123456789012345",
+    "facebookAppId": "579543219738834",
+    "facebookDisplayName": "mynews",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

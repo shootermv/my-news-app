@@ -1,8 +1,11 @@
 import * as React from "react";
+import {useContext} from "react";
 import { View, Button, StyleSheet, StatusBar, FlatList } from "react-native";
 import categories from "../../constants/categories";
+import { AuthContext } from "../../utils/AuthContext";
 
 export default ({ navigation }) => {
+  const {userToken} = useContext(AuthContext);
   const renderItem = ({ item }) => (
     <View style={styles.item}>
       <Button
@@ -24,7 +27,7 @@ export default ({ navigation }) => {
    
       <Button
         title="Go to Favorites"
-        onPress={() => navigation.navigate("Favorites")}
+        onPress={() => navigation.navigate(userToken ? "Favorites" : "SignIn")}
       />
     </View>
   );
