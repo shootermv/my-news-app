@@ -1,5 +1,6 @@
 ## my-news-app
 A cross platform (iOS and Android) React Native news app
+![App In Ction](https://raw.githubusercontent.com/shootermv/my-news-app/main/appInAction.gif)
 # About This Project
 This project purpose was a tech assignment for one of companies i applyed to
 
