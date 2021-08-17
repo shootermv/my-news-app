@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
+import {View, StyleSheet, Text } from "react-native";
+import { Button, Center, NativeBaseProvider } from "native-base"
 import colors from "../constants/colors";
 
 const Card = ({ item, onButtonPress, buttonText = "" }) => (
   <View style={styles.item}>
     <Text style={styles.title}>{item.title}</Text>
     <Button
-      title={buttonText}
       onPress={() => {
         onButtonPress(item);
-      }}
-    />
+      }}>{buttonText}</Button>
+    
   </View>
 );
 
