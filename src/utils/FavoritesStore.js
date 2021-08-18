@@ -19,10 +19,7 @@ export const removeValueFromStore = async (idToRemove) => {
     const items = itemsFromStore ? JSON.parse(itemsFromStore) : [];
     if (!items.length) return; // nothing to remove from
     const filteredItems = items.filter(({ id }) => id !== idToRemove);
-    await AsyncStorage.setItem(
-        FAVORITES_KEY,
-      JSON.stringify(filteredItems)
-    );
+    await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(filteredItems));
     Alert.alert("Item Removed");
     return;
   } catch (error) {
@@ -32,22 +29,18 @@ export const removeValueFromStore = async (idToRemove) => {
 };
 
 export const saveValueToStore = async (item) => {
-    try {
-     const itemsFromStore = await AsyncStorage.getItem(FAVORITES_KEY);
-     const items = itemsFromStore ? JSON.parse(itemsFromStore) : [];
-     // generate ID
-     const newID = generateId(item);
-     // prevent saving same article again
-     if (items?.find(({id}) => id === newID)) {
-         Alert.alert('Data Exists');
-         return;
-     }
-     
-     const newItem = {...item, id: newID};
-     await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify([...items, newItem]));
-    
-     Alert.alert('Data Saved');
-   } catch(error) {
-     Alert.alert(error || 'Data Not Saved');
-   }
- };
+  const itemsFromStore = await AsyncStorage.getItem(FAVORITES_KEY);
+  const items = itemsFromStore ? JSON.parse(itemsFromStore) : [];
+  // generate ID
+  const newID = generateId(item);
+  // prevent saving same article again
+  if (items?.find(({ id }) => id === newID)) {
+    throw Error("Data Exists");
+  }
+
+  const newItem = { ...item, id: newID };
+  return await AsyncStorage.setItem(
+    FAVORITES_KEY,
+    JSON.stringify([...items, newItem])
+  );
+};
