@@ -30,3 +30,10 @@ run the project on your device
 
 # Basic Look Of Screens
 ![Image of Screens](https://raw.githubusercontent.com/shootermv/my-news-app/main/screens.png)
+
+
+### Future Plans
+to create 3 branches:  
+1. basic - for functionality built as simple and quick as possible
+2. react-query - code is shorter and accurate
+3. native-base - totaly different and more beutifull UI
