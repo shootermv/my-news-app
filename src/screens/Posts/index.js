@@ -8,14 +8,14 @@ import {
   Text,
   StatusBar,
 } from "react-native";
-import { useQuery, useMutation } from "react-query";
+
 
 import Card from "../../components/Card";
 import { Loading } from "../../components/Loading";
 import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
 import generateId from "../../utils/generateId";
-import { usePostsData } from "../../utils/api";
+import { usePostsData } from "./usePosts";
 
 const renderItem = ({ item }) => (
   <Card
