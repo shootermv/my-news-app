@@ -4,6 +4,9 @@ import { useState } from "react";
 import { AuthContext } from "./src/utils/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { NativeBaseProvider } from "native-base";
+/* solve "setting a timer for a long period-of-time" warning */
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Setting a timer']);
 
 import Main from './src'
 
