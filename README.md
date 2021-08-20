@@ -1,11 +1,11 @@
 ## my-news-app
 A cross platform (iOS and Android) React Native news app  
-![App In Action](https://raw.githubusercontent.com/shootermv/my-news-app/main/appInAction.gif)
+![App In Action](./appInAction.gif)
 # About This Project
 This project purpose was a tech assignment for one of companies i applyed to
 
 # Requirements
-![Image of Requirements](https://raw.githubusercontent.com/shootermv/my-news-app/main/requirements.PNG)
+![Image of Requirements](./requirements.PNG)
 # Tech Stack
 * React-Native  - because it is cool (and also it was a requirement)
 * Expo - because i wanted to play with this interesting tool  
@@ -29,4 +29,4 @@ run the project on your device
 ```yarn android``` or ```yarn ios```
 
 # Basic Look Of Screens
-![Image of Screens](https://raw.githubusercontent.com/shootermv/my-news-app/main/screens.png)
+![Image of Screens](./screens.png)
