@@ -3,6 +3,10 @@ import { useState } from "react";
 
 import { AuthContext } from "./src/utils/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { NativeBaseProvider } from "native-base";
+/* solve "setting a timer for a long period-of-time" warning */
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Setting a timer']);
 
 const queryClient = new QueryClient();
 
@@ -11,11 +15,13 @@ import Main from "./src";
 function App() {
   const [userToken, setUserToken] = useState(null);
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthContext.Provider value={{ userToken, setUserToken }}>
-        <Main />
-      </AuthContext.Provider>
-    </QueryClientProvider>
+    <NativeBaseProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthContext.Provider value={{ userToken, setUserToken }}>
+          <Main/>
+        </AuthContext.Provider>
+      </QueryClientProvider>
+    </NativeBaseProvider>
   );
 }
 

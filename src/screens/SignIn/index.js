@@ -1,8 +1,10 @@
 import * as React from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../utils/AuthContext";
-import { Button, Alert } from "react-native";
+import { Alert } from "react-native";
 import * as Facebook from "expo-facebook";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Icon, Button, Center } from "native-base";
 
 export default () => {
   const { setUserToken } = useContext(AuthContext);
@@ -29,5 +31,16 @@ export default () => {
       Alert.alert(`Facebook Login Error: ${message}`);
     }
   }
-  return <Button title="log in with FB" onPress={() => logIn()} />;
+  return (
+    <Center marginTop="12">
+      <Button
+        startIcon={
+          <Icon as={MaterialCommunityIcons} name="facebook" size={5} />
+        }
+        onPress={() => logIn()}
+      >
+        log in with FB
+      </Button>
+    </Center>
+  );
 };
