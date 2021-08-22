@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import generateId from "./generateId";
-const FAVORITES_KEY = "@my-favorite-news";
+import {FAVORITES_KEY} from '../constants/asyncStore.js'
 
 export const getValuesFromStore = async () => {
   try {
