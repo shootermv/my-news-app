@@ -12,12 +12,15 @@ import {
   Icon,
   HStack,
   Avatar,
-  Center
+  Center,  
+  useToast
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
+
 const Favorites = () => {
+  const toast = useToast();
   const getData = async () => {
     const items = await getValuesFromStore();
     setListData(items.map(item => ({key: item.id, ...item})));
@@ -33,8 +36,20 @@ const Favorites = () => {
     }
   };
   const deleteRow = async (_, rowKey) => {
-    await removeValueFromStore(rowKey);
-    getData();
+    try {
+      await removeValueFromStore(rowKey);
+      
+      toast.show({
+        title: "Removed from Favorites",
+      });
+      getData();
+    } catch (error) {
+      console.log("failed to remove item from Favorites", error)
+      toast.show({
+        title: "failed to remove item from Favorites",
+        status: "error",
+      });
+    }
   };
   const renderHiddenItem = (data, rowMap) => {
  
