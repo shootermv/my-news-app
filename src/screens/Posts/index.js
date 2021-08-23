@@ -45,7 +45,7 @@ const Posts = ({ route }) => {
       <FlatList
         data={data}
         renderItem={({item}) => renderItem({item, toast})}
-        keyExtractor={(item) => generateId(item)}
+        keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
   );

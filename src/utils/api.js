@@ -10,7 +10,7 @@ const appFetch = async (path, options = {}) => {
       throw Error(res?.errors || 'Some error');
     }
     const jsonData = await res.json();
-    return jsonData.data;
+    return jsonData.data.map((itm, idx) => ({...itm, id: idx}));
 }
   
 const mockFetch = () =>  new Promise((res)=>setTimeout(res(DATA.data), 1000));
