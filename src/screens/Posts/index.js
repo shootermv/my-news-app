@@ -1,9 +1,9 @@
 import React from "react";
 import { SafeAreaView, FlatList, StyleSheet, StatusBar } from "react-native";
-import { Heading, Center, useToast } from "native-base";
+import { Heading, Center, useToast, Spinner } from "native-base";
 
 import Card from "../../components/Card";
-import { Loading } from "../../components/Loading";
+
 import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
 import generateId from "../../utils/generateId";
@@ -35,7 +35,7 @@ const renderItem = ({ item, toast }) => {
 const Posts = ({ route }) => {
   const { data, error, isFetching } = usePostsData(route.params.category);
   const toast = useToast();
-  if (isFetching) return <Loading />;
+  if (isFetching) return   <Spinner accessibilityLabel="Loading posts" />;
   if (error) return <Toast text="some error happen" />;
   return (
     <SafeAreaView style={styles.container}>
