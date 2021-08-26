@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import {
   getValuesFromStore,
@@ -13,7 +13,9 @@ import {
   HStack,
   Avatar,
   Center,  
-  useToast
+  useToast, 
+  AlertDialog,
+  Button
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
@@ -30,18 +32,24 @@ const Favorites = () => {
     getData();
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = useRef();
+
   const closeRow = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
         rowMap[rowKey].closeRow();
     }
   };
-  const deleteRow = async (_, rowKey) => {
+
+  const deleteRow = async (_, rowKey, onClose) => {
     try {
       await removeValueFromStore(rowKey);
       
       toast.show({
         title: "Removed from Favorites",
       });
+      onClose()
       getData();
     } catch (error) {
       console.log("failed to remove item from Favorites", error)
@@ -51,10 +59,33 @@ const Favorites = () => {
       });
     }
   };
+
   const renderHiddenItem = (data, rowMap) => {
- 
     return (
       <HStack flex={1} pl={2}>
+        <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        motionPreset={"fade"}
+      >
+        <AlertDialog.Content>
+          <AlertDialog.Header fontSize="lg" fontWeight="bold">
+            Delete Item
+          </AlertDialog.Header>
+          <AlertDialog.Body>
+            Are you sure? You can't undo this action afterwards.
+          </AlertDialog.Body>
+          <AlertDialog.Footer>
+            <Button ref={cancelRef} onPress={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="red" onPress={() => deleteRow(rowMap, data.item.id, onClose)} ml={3}>
+              Delete
+            </Button>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog>
         <Pressable
           px={4}
           ml="auto"
@@ -71,7 +102,11 @@ const Favorites = () => {
           px={4}
           bg="red.500"
           justifyContent="center"
-          onPress={() => deleteRow(rowMap, data.item.id)}
+          onPress={() => {
+            //
+            setIsOpen(true) 
+            //deleteRow(rowMap, data.item.id);
+          }}
           _pressed={{
             opacity: 0.5,
           }}
@@ -81,6 +116,7 @@ const Favorites = () => {
       </HStack>
     );
   };
+
   const renderItem = ({ item, index }) => (
     <Box>
       <Pressable
@@ -108,9 +144,11 @@ const Favorites = () => {
       </Pressable>
     </Box>
   );
+
   if (!listData.length) return <Center><Text>No favorites yet...</Text></Center>
   return (
     <Box bg="white" safeArea flex={1}>
+      
       <SwipeListView
         data={listData}
         renderItem={renderItem}
