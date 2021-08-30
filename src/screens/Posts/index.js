@@ -1,16 +1,15 @@
 import React from "react";
-import { SafeAreaView, FlatList, StyleSheet, StatusBar } from "react-native";
-import { Heading, Center, useToast, Spinner } from "native-base";
+import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
+import { Heading, Center, useToast, Spinner, FlatList } from "native-base";
 
 import Card from "../../components/Card";
 
 import { Toast } from "../../components/Toast";
 import { saveValueToStore } from "../../utils/FavoritesStore";
-import generateId from "../../utils/generateId";
 import { usePostsData } from "../../utils/api";
+import ColorCenter from "../../components/ColorableCenter";
 
 const renderItem = ({ item, toast }) => {
-  
   return (
     <Card
       item={item}
@@ -18,7 +17,7 @@ const renderItem = ({ item, toast }) => {
         try{
           await saveValueToStore(item);
           toast.show({
-            title: "Saved At Faovrites",
+            title: "Saved At Favorites",
           });
         } catch(er) {
           toast.show({
@@ -38,16 +37,16 @@ const Posts = ({ route }) => {
   if (isFetching) return   <Spinner accessibilityLabel="Loading posts" />;
   if (error) return <Toast text="some error happen" />;
   return (
-    <SafeAreaView style={styles.container}>
-      <Center marginTop="4">
-        <Heading>{`Posts of "${route.params.category}" category`}</Heading>
-      </Center>
+    <ColorCenter>
+      
+      <Heading>{`Posts of "${route.params.category}" category`}</Heading>
+     
       <FlatList
         data={data}
         renderItem={({item}) => renderItem({item, toast})}
         keyExtractor={(item) => item.id}
       />
-    </SafeAreaView>
+   </ColorCenter>
   );
 };
 

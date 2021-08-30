@@ -4,7 +4,8 @@ import { View, StyleSheet } from "react-native";
 import categories from "../../constants/categories";
 import { AuthContext } from "../../utils/AuthContext";
 
-import { Center, Button, FlatList, Heading } from "native-base";
+import {  Button, FlatList, Heading } from "native-base";
+import ColorCenter from "../../components/ColorableCenter";
 
 export default ({ navigation }) => {
   const { userToken } = useContext(AuthContext);
@@ -21,7 +22,7 @@ export default ({ navigation }) => {
   );
 
   return (
-    <Center flex={1}>
+    <ColorCenter>
       <Heading marginTop="4">Categories</Heading>
       <FlatList
         data={categories}
@@ -34,7 +35,7 @@ export default ({ navigation }) => {
       >
         Go to Favorites
       </Button>
-    </Center>
+    </ColorCenter>
   );
 };
 const styles = StyleSheet.create({

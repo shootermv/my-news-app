@@ -62,6 +62,7 @@ const Favorites = () => {
 
   const renderHiddenItem = (data, rowMap) => {
     return (
+
       <HStack flex={1} pl={2}>
         <AlertDialog
         leastDestructiveRef={cancelRef}
@@ -147,8 +148,7 @@ const Favorites = () => {
 
   if (!listData.length) return <Center><Text>No favorites yet...</Text></Center>
   return (
-    <Box bg="white" safeArea flex={1}>
-      
+    <ColorCenter>
       <SwipeListView
         data={listData}
         renderItem={renderItem}
@@ -158,7 +158,7 @@ const Favorites = () => {
         previewOpenValue={-40}
         previewOpenDelay={3000}
       />
-    </Box>
+    </ColorCenter>
   );
  
 };
