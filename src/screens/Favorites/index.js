@@ -4,7 +4,7 @@ import {
   getValuesFromStore,
   removeValueFromStore,
 } from "../../utils/FavoritesStore";
-
+import ColorCenter from "../../components/ColorableCenter";
 import {
   Box,
   Text,
