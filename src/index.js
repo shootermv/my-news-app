@@ -11,10 +11,7 @@ import SignInScreen from "./screens/SignIn";
 
 const MainStack = createNativeStackNavigator();
 
-import {
-  Button,
-  useColorMode,
-} from "native-base";
+import { Button, useColorMode } from "native-base";
 // providers
 
 import { AuthContext } from "./utils/AuthContext";
@@ -36,13 +33,17 @@ function Main() {
             ),
           }}
         />
-        <MainStack.Screen name="Posts" component={PostsScreen}  options={{
+        <MainStack.Screen
+          name="Posts"
+          component={PostsScreen}
+          options={{
             headerRight: () => (
               <Button onPress={toggleColorMode} color="#fff">
                 k
               </Button>
             ),
-          }}/>
+          }}
+        />
 
         {userToken == null ? (
           <MainStack.Screen name="SignIn" component={SignInScreen} />
