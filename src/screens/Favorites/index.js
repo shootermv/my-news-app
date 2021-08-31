@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import { useColorMode } from "native-base";
 import {
   getValuesFromStore,
   removeValueFromStore,
 } from "../../utils/FavoritesStore";
 import ColorCenter from "../../components/ColorableCenter";
+
 import {
   Box,
   Text,
@@ -12,47 +13,47 @@ import {
   Icon,
   HStack,
   Avatar,
-  Center,  
-  useToast, 
+  Center,
+  useToast,
   AlertDialog,
-  Button
+  Button,
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
-
 const Favorites = () => {
+  const { colorMode } = useColorMode();
   const toast = useToast();
   const getData = async () => {
     const items = await getValuesFromStore();
-    setListData(items.map(item => ({key: item.id, ...item})));
+    setListData(items.map((item) => ({ key: item.id, ...item })));
   };
   const [listData, setListData] = useState([]);
   useEffect(() => {
     getData();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const onClose = () => setIsOpen(false);
+  const [isOpen, setIsDialogOpen] = useState(false);
+  const onClose = () => setIsDialogOpen(false);
   const cancelRef = useRef();
 
   const closeRow = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
-        rowMap[rowKey].closeRow();
+      rowMap[rowKey].closeRow();
     }
   };
 
   const deleteRow = async (_, rowKey, onClose) => {
     try {
       await removeValueFromStore(rowKey);
-      
+
       toast.show({
         title: "Removed from Favorites",
       });
-      onClose()
+      onClose();
       getData();
     } catch (error) {
-      console.log("failed to remove item from Favorites", error)
+      console.log("failed to remove item from Favorites", error);
       toast.show({
         title: "failed to remove item from Favorites",
         status: "error",
@@ -60,33 +61,36 @@ const Favorites = () => {
     }
   };
 
-  const renderHiddenItem = (data, rowMap) => {
+  const HiddenItem = ({ data, rowMap }) => {
     return (
-
       <HStack flex={1} pl={2}>
         <AlertDialog
-        leastDestructiveRef={cancelRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        motionPreset={"fade"}
-      >
-        <AlertDialog.Content>
-          <AlertDialog.Header fontSize="lg" fontWeight="bold">
-            Delete Item
-          </AlertDialog.Header>
-          <AlertDialog.Body>
-            Are you sure? You can't undo this action afterwards.
-          </AlertDialog.Body>
-          <AlertDialog.Footer>
-            <Button ref={cancelRef} onPress={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="red" onPress={() => deleteRow(rowMap, data.item.id, onClose)} ml={3}>
-              Delete
-            </Button>
-          </AlertDialog.Footer>
-        </AlertDialog.Content>
-      </AlertDialog>
+          leastDestructiveRef={cancelRef}
+          isOpen={isOpen}
+          onClose={onClose}
+          motionPreset={"fade"}
+        >
+          <AlertDialog.Content>
+            <AlertDialog.Header fontSize="lg" fontWeight="bold">
+              Delete Item
+            </AlertDialog.Header>
+            <AlertDialog.Body>
+              Are you sure? You can't undo this action afterwards.
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button ref={cancelRef} onPress={onClose}>
+                Cancel
+              </Button>
+              <Button
+                colorScheme="red"
+                onPress={() => deleteRow(rowMap, data.item.id, onClose)}
+                ml={3}
+              >
+                Delete
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog>
         <Pressable
           px={4}
           ml="auto"
@@ -104,9 +108,8 @@ const Favorites = () => {
           bg="red.500"
           justifyContent="center"
           onPress={() => {
-            //
-            setIsOpen(true) 
-            //deleteRow(rowMap, data.item.id);
+      
+            setIsDialogOpen(true);
           }}
           _pressed={{
             opacity: 0.5,
@@ -117,38 +120,49 @@ const Favorites = () => {
       </HStack>
     );
   };
-
-  const renderItem = ({ item, index }) => (
-    <Box>
-      <Pressable
-        onPress={() => console.log("You touched me")}
-        alignItems="center"
-        bg="white"
-        borderBottomColor="trueGray.200"
-        borderBottomWidth={1}
-        justifyContent="center"
-        height={50}
-        underlayColor={"#AAA"}
-        _pressed={{
-          bg: "trueGray.200",
-        }}
-        py={8}
-      >
-        <HStack width="100%" px={4}>
-          <HStack space={2} alignItems="center">
-            <Avatar color="white" bg={"secondary.700"}>
-              <Text>{index}</Text>
-            </Avatar>
-            <Text>{item.title}</Text>
+  const renderHiddenItem = (data, rowMap) => {
+    return <HiddenItem {...{ data, rowMap }} />;
+  };
+  const Item = ({ item, index }) => {
+    const { colorMode } = useColorMode();
+    return (
+      <Box>
+        <Pressable
+          onPress={() => console.log("You touched me")}
+          alignItems="center"
+          bg={colorMode === "dark" ? "dark.200" : "white"}
+          borderBottomColor="trueGray.200"
+          borderBottomWidth={1}
+          justifyContent="center"
+          height={50}
+          underlayColor={"#AAA"}
+          _pressed={{
+            bg: "trueGray.200",
+          }}
+          py={8}
+        >
+          <HStack width="100%" px={4}>
+            <HStack space={2} alignItems="center">
+              <Avatar color="white" bg={"secondary.700"}>
+                <Text>{index}</Text>
+              </Avatar>
+              <Text>{item.title}</Text>
+            </HStack>
           </HStack>
-        </HStack>
-      </Pressable>
-    </Box>
-  );
+        </Pressable>
+      </Box>
+    );
+  };
+  const renderItem = ({ item, index }) => <Item {...{ item, index }} />;
 
-  if (!listData.length) return <Center><Text>No favorites yet...</Text></Center>
+  if (!listData.length)
+    return (
+      <Center>
+        <Text>No favorites yet...</Text>
+      </Center>
+    );
   return (
-    <ColorCenter>
+    <Box           bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>
       <SwipeListView
         data={listData}
         renderItem={renderItem}
@@ -158,10 +172,8 @@ const Favorites = () => {
         previewOpenValue={-40}
         previewOpenDelay={3000}
       />
-    </ColorCenter>
+    </Box>
   );
- 
 };
-
 
 export default Favorites;
