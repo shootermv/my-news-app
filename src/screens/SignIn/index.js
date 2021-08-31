@@ -6,7 +6,7 @@ import * as Facebook from "expo-facebook";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Icon, Button, Center } from "native-base";
 
-export default () => {
+export default ({navigation}) => {
   const { setUserToken } = useContext(AuthContext);
   async function logIn() {
     try {
@@ -22,8 +22,10 @@ export default () => {
         const response = await fetch(
           `https://graph.facebook.com/me?access_token=${token}`
         );
-        Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
+         // Alert.alert("Logged in!", `Hi ${(await response.json()).name}!`);
         setUserToken(token);
+        navigation.navigate('Favorites')
+
       } else {
         Alert.alert("Some error when trying to log in");
       }
