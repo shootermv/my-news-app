@@ -44,7 +44,7 @@ const Posts = ({ route }) => {
       <FlatList
         data={data}
         renderItem={({item}) => renderItem({item, toast})}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => `${item.id}`}
       />
    </ColorCenter>
   );
