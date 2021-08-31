@@ -15,9 +15,20 @@ import { Button, useColorMode } from "native-base";
 // providers
 
 import { AuthContext } from "./utils/AuthContext";
-function Main() {
-  const { toggleColorMode } = useColorMode();
 
+function ColorToggle() {
+  const { toggleColorMode } = useColorMode();
+  return (
+    <Button onPress={toggleColorMode} color="#fff">
+      k
+    </Button>
+  );
+}
+
+function Main() {
+  const options = {
+    headerRight: ColorToggle,
+  }
   const { userToken } = useContext(AuthContext);
   return (
     <NavigationContainer>
@@ -25,30 +36,22 @@ function Main() {
         <MainStack.Screen
           name="Home"
           component={HomeScreen}
-          options={{
-            headerRight: () => (
-              <Button onPress={toggleColorMode} color="#fff">
-                k
-              </Button>
-            ),
-          }}
+          options={options}
         />
         <MainStack.Screen
           name="Posts"
           component={PostsScreen}
-          options={{
-            headerRight: () => (
-              <Button onPress={toggleColorMode} color="#fff">
-                k
-              </Button>
-            ),
-          }}
+          options={options}
         />
 
         {userToken == null ? (
           <MainStack.Screen name="SignIn" component={SignInScreen} />
         ) : (
-          <MainStack.Screen name="Favorites" component={FavoritesScreen} />
+          <MainStack.Screen
+            name="Favorites"
+            component={FavoritesScreen}
+            options={options}
+          />
         )}
       </MainStack.Navigator>
     </NavigationContainer>
