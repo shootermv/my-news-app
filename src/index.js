@@ -9,25 +9,24 @@ import PostsScreen from "./screens/Posts";
 import FavoritesScreen from "./screens/Favorites";
 import SignInScreen from "./screens/SignIn";
 
+import ColorToggle from "./components/ColorToggle";
+import {
+  useColorMode,
+} from "native-base";
+
 const MainStack = createNativeStackNavigator();
 
-import { Button, useColorMode } from "native-base";
 // providers
-
 import { AuthContext } from "./utils/AuthContext";
 
-function ColorToggle() {
-  const { toggleColorMode } = useColorMode();
-  return (
-    <Button onPress={toggleColorMode} color="#fff">
-      k
-    </Button>
-  );
-}
-
 function Main() {
+  const { colorMode } = useColorMode();
   const options = {
     headerRight: ColorToggle,
+    headerTintColor: colorMode === 'dark' ?'#fff' :'#000',
+    headerStyle: {
+      backgroundColor: colorMode === 'dark' ?'#333' :'#fefefe'
+    },
   }
   const { userToken } = useContext(AuthContext);
   return (
