@@ -33,9 +33,9 @@ const Favorites = () => {
     getData();
   }, []);
 
-  const [isOpen, setIsDialogOpen] = useState(false);
-  const onClose = () => setIsDialogOpen(false);
-  const cancelRef = useRef();
+  //const [isOpen, setIsDialogOpen] = useState(false);
+  //const onClose = () => setIsDialogOpen(false);
+  //const cancelRef = useRef();
 
   const closeRow = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
@@ -43,14 +43,14 @@ const Favorites = () => {
     }
   };
 
-  const deleteRow = async (_, rowKey, onClose) => {
+  const deleteRow = async (rowKey) => {
     try {
       await removeValueFromStore(rowKey);
 
       toast.show({
         title: "Removed from Favorites",
       });
-      onClose();
+      //onClose();
       getData();
     } catch (error) {
       console.log("failed to remove item from Favorites", error);
@@ -64,7 +64,7 @@ const Favorites = () => {
   const HiddenItem = ({ data, rowMap }) => {
     return (
       <HStack flex={1} pl={2}>
-        <AlertDialog
+        {/*<AlertDialog
           leastDestructiveRef={cancelRef}
           isOpen={isOpen}
           onClose={onClose}
@@ -90,7 +90,7 @@ const Favorites = () => {
               </Button>
             </AlertDialog.Footer>
           </AlertDialog.Content>
-        </AlertDialog>
+        </AlertDialog>*/}
         <Pressable
           px={4}
           ml="auto"
@@ -109,7 +109,8 @@ const Favorites = () => {
           justifyContent="center"
           onPress={() => {
       
-            setIsDialogOpen(true);
+            //setIsDialogOpen(true);
+            deleteRow(data.item.key)
           }}
           _pressed={{
             opacity: 0.5,
@@ -162,7 +163,7 @@ const Favorites = () => {
       </Center>
     );
   return (
-    <Box           bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>
+    <Box  bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>
       <SwipeListView
         data={listData}
         renderItem={renderItem}

@@ -11,11 +11,13 @@ const Item = ({ item }) => {
       item={item}
       onButtonPress={async () => {
         try {
+
           await saveValueToStore(item);
           toast.show({
             title: "Saved At Favorites",
           });
         } catch (er) {
+          console.log('error:', er)
           toast.show({
             title: "Already Exsist",
             status: "error",
