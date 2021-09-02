@@ -19,7 +19,8 @@ import {
   Button,
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import HiddenItem from "./components/HiddenItem";
+
 
 const Favorites = () => {
   const { colorMode } = useColorMode();
@@ -33,96 +34,8 @@ const Favorites = () => {
     getData();
   }, []);
 
-  //const [isOpen, setIsDialogOpen] = useState(false);
-  //const onClose = () => setIsDialogOpen(false);
-  //const cancelRef = useRef();
-
-  const closeRow = (rowMap, rowKey) => {
-    if (rowMap[rowKey]) {
-      rowMap[rowKey].closeRow();
-    }
-  };
-
-  const deleteRow = async (rowKey) => {
-    try {
-      await removeValueFromStore(rowKey);
-
-      toast.show({
-        title: "Removed from Favorites",
-      });
-      //onClose();
-      getData();
-    } catch (error) {
-      console.log("failed to remove item from Favorites", error);
-      toast.show({
-        title: "failed to remove item from Favorites",
-        status: "error",
-      });
-    }
-  };
-
-  const HiddenItem = ({ data, rowMap }) => {
-    return (
-      <HStack flex={1} pl={2}>
-        {/*<AlertDialog
-          leastDestructiveRef={cancelRef}
-          isOpen={isOpen}
-          onClose={onClose}
-          motionPreset={"fade"}
-        >
-          <AlertDialog.Content>
-            <AlertDialog.Header fontSize="lg" fontWeight="bold">
-              Delete Item
-            </AlertDialog.Header>
-            <AlertDialog.Body>
-              Are you sure? You can't undo this action afterwards.
-            </AlertDialog.Body>
-            <AlertDialog.Footer>
-              <Button ref={cancelRef} onPress={onClose}>
-                Cancel
-              </Button>
-              <Button
-                colorScheme="red"
-                onPress={() => deleteRow(rowMap, data.item.id, onClose)}
-                ml={3}
-              >
-                Delete
-              </Button>
-            </AlertDialog.Footer>
-          </AlertDialog.Content>
-        </AlertDialog>*/}
-        <Pressable
-          px={4}
-          ml="auto"
-          bg="dark.500"
-          justifyContent="center"
-          onPress={() => closeRow(rowMap, data.item.key)}
-          _pressed={{
-            opacity: 0.5,
-          }}
-        >
-          <Icon as={<Ionicons name="close" />} color="white" />
-        </Pressable>
-        <Pressable
-          px={4}
-          bg="red.500"
-          justifyContent="center"
-          onPress={() => {
-      
-            //setIsDialogOpen(true);
-            deleteRow(data.item.key)
-          }}
-          _pressed={{
-            opacity: 0.5,
-          }}
-        >
-          <Icon as={<MaterialIcons name="delete" />} color="white" />
-        </Pressable>
-      </HStack>
-    );
-  };
   const renderHiddenItem = (data, rowMap) => {
-    return <HiddenItem {...{ data, rowMap }} />;
+    return <HiddenItem {...{ data, rowMap, toast, getData}} />;
   };
   const Item = ({ item, index }) => {
     const { colorMode } = useColorMode();
