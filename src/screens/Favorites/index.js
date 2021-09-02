@@ -158,9 +158,9 @@ const Favorites = () => {
 
   if (!listData.length)
     return (
-      <Center>
+      <ColorCenter>
         <Text>No favorites yet...</Text>
-      </Center>
+      </ColorCenter>
     );
   return (
     <Box  bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>

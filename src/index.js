@@ -10,9 +10,7 @@ import FavoritesScreen from "./screens/Favorites";
 import SignInScreen from "./screens/SignIn";
 
 import ColorToggle from "./components/ColorToggle";
-import {
-  useColorMode,
-} from "native-base";
+import { useColorMode } from "native-base";
 
 const MainStack = createNativeStackNavigator();
 
@@ -23,11 +21,11 @@ function Main() {
   const { colorMode } = useColorMode();
   const options = {
     headerRight: ColorToggle,
-    headerTintColor: colorMode === 'dark' ?'#fff' :'#000',
+    headerTintColor: colorMode === "dark" ? "#fff" : "#000",
     headerStyle: {
-      backgroundColor: colorMode === 'dark' ?'#333' :'#fefefe'
+      backgroundColor: colorMode === "dark" ? "#333" : "#fefefe",
     },
-  }
+  };
   const { userToken } = useContext(AuthContext);
   return (
     <NavigationContainer>
@@ -44,7 +42,11 @@ function Main() {
         />
 
         {userToken == null ? (
-          <MainStack.Screen name="SignIn" component={SignInScreen} />
+          <MainStack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={options}
+          />
         ) : (
           <MainStack.Screen
             name="Favorites"

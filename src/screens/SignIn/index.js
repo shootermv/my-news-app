@@ -5,6 +5,7 @@ import { Alert } from "react-native";
 import * as Facebook from "expo-facebook";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Icon, Button, Center } from "native-base";
+import ColorCenter from "../../components/ColorableCenter";
 
 export default ({navigation}) => {
   const { setUserToken } = useContext(AuthContext);
@@ -34,15 +35,15 @@ export default ({navigation}) => {
     }
   }
   return (
-    <Center marginTop="12">
+    <ColorCenter>
       <Button
         startIcon={
-          <Icon as={MaterialCommunityIcons} name="facebook" size={5} />
+          <Icon as={MaterialCommunityIcons} name="facebook" size="md" />
         }
         onPress={() => logIn()}
       >
         log in with FB
       </Button>
-    </Center>
+    </ColorCenter>
   );
 };

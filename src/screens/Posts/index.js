@@ -11,8 +11,8 @@ import ColorCenter from "../../components/ColorableCenter";
 const Posts = ({ route }) => {
   const { data, error, isFetching } = usePostsData(route.params.category);
 
-  if (isFetching) return <Spinner accessibilityLabel="Loading posts" />;
-  if (error) return <Toast text="some error happen" />;
+  if (isFetching) return <ColorCenter><Spinner accessibilityLabel="Loading posts" /></ColorCenter>;
+  if (error) return <ColorCenter><Toast text="some error happen" /></ColorCenter>;
   return (
     <ColorCenter>
       <Heading>{`Posts of "${route.params.category}" category`}</Heading>
