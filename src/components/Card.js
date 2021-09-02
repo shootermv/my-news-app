@@ -1,7 +1,7 @@
 import React from "react";
-import {View, StyleSheet} from "react-native";
+import { StyleSheet} from "react-native";
 import { Button, Icon, Text, useColorMode, Box} from "native-base"
-import colors from "../constants/colors";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 const Card = ({ item, onButtonPress, buttonText = "" }) =>{
