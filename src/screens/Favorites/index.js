@@ -1,15 +1,9 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useColorMode } from "native-base";
-import {
-  getValuesFromStore,
-} from "../../utils/FavoritesStore";
+import { getValuesFromStore } from "../../utils/FavoritesStore";
 import ColorCenter from "../../components/ColorableCenter";
 
-import {
-  Box,
-  Text,
-  useToast,
-} from "native-base";
+import { Box, Text, useToast } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 
 import HiddenItem from "./components/HiddenItem";
@@ -27,10 +21,10 @@ const Favorites = () => {
     getData();
   }, []);
 
-  const renderHiddenItem = (data, rowMap) => {
-    return <HiddenItem {...{ data, rowMap, toast, getData}} />;
-  };
-  
+  const renderHiddenItem = (data, rowMap) => (
+    <HiddenItem {...{ data, rowMap, toast, getData }} />
+  );
+
   const renderItem = ({ item, index }) => <Item {...{ item, index }} />;
 
   if (!listData.length)
@@ -40,7 +34,7 @@ const Favorites = () => {
       </ColorCenter>
     );
   return (
-    <Box  bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>
+    <Box bg={colorMode === "dark" ? "black" : "white"} safeArea flex={1}>
       <SwipeListView
         data={listData}
         renderItem={renderItem}
