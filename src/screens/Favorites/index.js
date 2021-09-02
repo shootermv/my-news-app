@@ -8,14 +8,7 @@ import ColorCenter from "../../components/ColorableCenter";
 import {
   Box,
   Text,
-  Pressable,
-  Icon,
-  HStack,
-  Avatar,
-  Center,
   useToast,
-  AlertDialog,
-  Button,
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 
