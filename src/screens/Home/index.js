@@ -31,7 +31,7 @@ export default ({ navigation }) => {
       />
 
       <Button
-        onPress={() => navigation.navigate(userToken ? "Favorites" : "SignIn")}
+        onPress={() => navigation.navigate("Favorites")}
       >
         Go to Favorites
       </Button>

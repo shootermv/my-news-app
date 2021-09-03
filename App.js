@@ -15,13 +15,15 @@ import Main from "./src";
 function App() {
   const [userToken, setUserToken] = useState(null);
   return (
+   
     <NativeBaseProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthContext.Provider value={{ userToken, setUserToken }}>
-          <Main/>
-        </AuthContext.Provider>
-      </QueryClientProvider>
+         <AuthContext.Provider value={{ userToken, setUserToken }}>
+           <Main/>
+         </AuthContext.Provider>
+       </QueryClientProvider>
     </NativeBaseProvider>
+       
   );
 }
 

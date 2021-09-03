@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
+
 import { useColorMode } from "native-base";
 import { getValuesFromStore } from "../../utils/FavoritesStore";
 import ColorCenter from "../../components/ColorableCenter";
@@ -17,9 +19,11 @@ const Favorites = () => {
     setListData(items.map((item) => ({ key: item.id, ...item })));
   };
   const [listData, setListData] = useState([]);
-  useEffect(() => {
-    getData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getData()
+    }, [])
+  );
 
   const renderHiddenItem = (data, rowMap) => (
     <HiddenItem {...{ data, rowMap, toast, getData }} />
