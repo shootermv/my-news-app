@@ -32,9 +32,11 @@ run the project on your device
 ![Image of Screens](./screens.png)
 
 
-### Future Plans
-to create 3 branches:  
+### Varios Branches 
 1. basic - for functionality built as simple and quick as possible
 2. react-query - code is shorter and accurate
 3. native-base - totaly different and more beutifull UI
 
+### More Features
+* Theme Toggle
+* "Favorites" can be protected by facebook login
