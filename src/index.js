@@ -18,12 +18,15 @@ import {
   HStack,
   Divider,
   Icon,
+  useColorMode,
 } from "native-base";
 
 // screens
 import HomeScreen from "./screens/Home";
 import PostsScreen from "./screens/Posts";
 import FavoritesScreen from "./screens/Favorites";
+
+import ColorToggle from "./components/ColorToggle";
 
 const Drawer = createDrawerNavigator();
 /*
@@ -60,9 +63,19 @@ const getIcon = (screenName) => {
 };
 
 function CustomDrawerContent(props) {
+  const { colorMode } = useColorMode();
   return (
-    <DrawerContentScrollView {...props} safeArea>
-      <VStack space={6} my={2} mx={1}>
+    <DrawerContentScrollView
+      {...props}
+      safeArea
+      style={{ backgroundColor: colorMode === "dark" ? "black" : "white" }}
+    >
+      <VStack
+        space={6}
+        my={2}
+        mx={1}
+        bg={colorMode === "dark" ? "black" : "white"}
+      >
         <Box px={4}>
           <Text bold color="gray.700">
             My News
@@ -158,14 +171,31 @@ function CustomDrawerContent(props) {
   );
 }
 function MyDrawer() {
+  const { colorMode } = useColorMode();
+  const options = {
+    headerRight: ColorToggle,
+    headerTintColor: colorMode === "dark" ? "#fff" : "#000",
+    headerStyle: {
+      backgroundColor: colorMode === "dark" ? "#333" : "#fefefe",
+    },
+  };
   return (
-    <Box safeArea flex={1}>
+    <Box safeArea flex={1} DrawerContentScrollView>
       <Drawer.Navigator
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Posts" component={PostsScreen} initialParams={{ category: "general" }}/>
-        <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+        <Drawer.Screen name="Home" component={HomeScreen} options={options} />
+        <Drawer.Screen
+          name="Posts"
+          component={PostsScreen}
+          initialParams={{ category: "general" }}
+          options={options}
+        />
+        <Drawer.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={options}
+        />
       </Drawer.Navigator>
     </Box>
   );
