@@ -2,22 +2,24 @@ import React from "react";
 import { Pressable, Icon, HStack } from "native-base";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
-import { removeValueFromStore } from "../../../utils/FavoritesStore";
+import { removeValueFromStore, getValuesFromStore } from "../../../utils/FavoritesStore";
 
 
-const deleteRow = async (rowKey, toast, getData) => {
+const deleteRow = async (rowKey, toast, setListData) => {
   try {
     await removeValueFromStore(rowKey);
+    const items = await getValuesFromStore();
     toast.show({
       title: "Removed from Favorites",
     });
-    getData();
+    return await setListData(items.map((item) => ({ key: item.id, ...item })))
   } catch (error) {
     console.log("failed to remove item from Favorites", error);
     toast.show({
       title: "failed to remove item from Favorites",
       status: "error",
     });
+    return;
   }
 };
 
@@ -27,7 +29,7 @@ const closeRow = (rowMap, rowKey) => {
   }
 };
 
-const HiddenItem = ({ data, rowMap, toast, getData }) => {
+const HiddenItem = ({ data, rowMap, toast, setListData }) => {
   return (
     <HStack flex={1} pl={2}>
       <Pressable
@@ -47,7 +49,7 @@ const HiddenItem = ({ data, rowMap, toast, getData }) => {
         bg="red.500"
         justifyContent="center"
         onPress={() => {
-          deleteRow(data.item.key, toast, getData);
+          deleteRow(data.item.key, toast, setListData);
         }}
         _pressed={{
           opacity: 0.5,
