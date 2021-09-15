@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet} from "react-native";
 import { Button, Icon, Text, useColorMode, Box} from "native-base"
 
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 
 const Card = ({ item, onButtonPress, buttonText = "" }) =>{
   const { colorMode } = useColorMode();
@@ -11,7 +11,7 @@ const Card = ({ item, onButtonPress, buttonText = "" }) =>{
   <Box style={styles.item} bg={colorMode === 'dark' ? 'dark.100' : 'light.100'}>
     <Text style={styles.title}>{item.title}</Text>
     <Button
-    startIcon={<Icon as={MaterialCommunityIcons} name="heart" size={5} color="red"/>}
+      startIcon={<Ionicons name="md-heart" size={24} color="red"/>}
       onPress={() => {
         onButtonPress(item);
       }}>{buttonText}</Button>
