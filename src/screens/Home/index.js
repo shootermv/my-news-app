@@ -6,6 +6,7 @@ import { AuthContext } from "../../utils/AuthContext";
 
 import {  Button, FlatList, Heading } from "native-base";
 import ColorCenter from "../../components/ColorableCenter";
+import i18n from 'i18n-js';
 
 export default ({ navigation }) => {
   const { userToken } = useContext(AuthContext);
@@ -23,7 +24,7 @@ export default ({ navigation }) => {
 
   return (
     <ColorCenter>
-      <Heading marginTop="4">Categories</Heading>
+      <Heading marginTop="4">{i18n.t('categories')}</Heading>
       <FlatList
         data={categories}
         renderItem={renderItem}

@@ -8,6 +8,11 @@ import { NativeBaseProvider } from "native-base";
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Setting a timer']);
 
+
+
+
+import i18n from './src/utils/localization';
+
 const queryClient = new QueryClient();
 
 import Main from "./src";
