@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Text, Pressable, HStack, Avatar, useColorMode } from "native-base";
+import {
+  Box,
+  Text,
+  Pressable,
+  HStack,
+  Avatar,
+  useColorMode,
+} from "native-base";
 
 const Item = ({ item, index }) => {
   const { colorMode } = useColorMode();

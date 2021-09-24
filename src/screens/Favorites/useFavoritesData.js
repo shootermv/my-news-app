@@ -17,5 +17,5 @@ export const useFavoritesData = () => {
       getData();
     }, [])
   );
-  return {list, loading, setListData}
+  return { list, loading, setListData };
 };
