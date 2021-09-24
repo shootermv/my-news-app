@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 
 import { Spinner, useColorMode } from "native-base";
 import { getValuesFromStore } from "../../utils/FavoritesStore";
@@ -16,7 +16,7 @@ const Favorites = () => {
   const { colorMode } = useColorMode();
   const toast = useToast();
 
-  const {list: listData, loading, setListData} = useFavoritesData()
+  const { list: listData, loading, setListData } = useFavoritesData();
   /*
   const getData = async () => {
     const items = await getValuesFromStore();
@@ -37,8 +37,13 @@ const Favorites = () => {
 
   const renderItem = ({ item, index }) => <Item {...{ item, index }} />;
 
-  if (loading) return <ColorCenter><Spinner accessibilityLabel="Loading favories" /></ColorCenter>;
-  
+  if (loading)
+    return (
+      <ColorCenter>
+        <Spinner accessibilityLabel="Loading favories" />
+      </ColorCenter>
+    );
+
   if (!listData.length)
     return (
       <ColorCenter>

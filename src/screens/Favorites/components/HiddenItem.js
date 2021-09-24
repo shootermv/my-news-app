@@ -2,8 +2,10 @@ import React from "react";
 import { Pressable, Icon, HStack } from "native-base";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 
-import { removeValueFromStore, getValuesFromStore } from "../../../utils/FavoritesStore";
-
+import {
+  removeValueFromStore,
+  getValuesFromStore,
+} from "../../../utils/FavoritesStore";
 
 const deleteRow = async (rowKey, toast, setListData) => {
   try {
@@ -12,7 +14,7 @@ const deleteRow = async (rowKey, toast, setListData) => {
     toast.show({
       title: "Removed from Favorites",
     });
-    return await setListData(items.map((item) => ({ key: item.id, ...item })))
+    return await setListData(items.map((item) => ({ key: item.id, ...item })));
   } catch (error) {
     console.log("failed to remove item from Favorites", error);
     toast.show({

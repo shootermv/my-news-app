@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import categories from "../../constants/categories";
 import { AuthContext } from "../../utils/AuthContext";
 
-import {  Button, FlatList, Heading } from "native-base";
+import { Button, FlatList, Heading } from "native-base";
 import ColorCenter from "../../components/ColorableCenter";
 
 export default ({ navigation }) => {
@@ -30,9 +30,7 @@ export default ({ navigation }) => {
         keyExtractor={(item) => item.id}
       />
 
-      <Button
-        onPress={() => navigation.navigate("Favorites")}
-      >
+      <Button onPress={() => navigation.navigate("Favorites")}>
         Go to Favorites
       </Button>
     </ColorCenter>
