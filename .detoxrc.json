@@ -1,0 +1,39 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "skipLegacyWorkersInjection": true,
+  "apps": {
+    "ios": {
+      "type": "ios.app",
+      "binaryPath": "SPECIFY_PATH_TO_YOUR_APP_BINARY"
+    },
+    "android": {
+      "type": "android.apk",
+      "binaryPath": "bin/Exponent-2.21.7.apk"
+    }
+  },
+  "devices": {
+    "simulator": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 11"
+      }
+    },
+    "emulator": {
+      "type": "android.emulator",
+      "device": {
+        "avdName": "Nexus_5X_API_30"
+      }
+    }
+  },
+  "configurations": {
+    "ios": {
+      "device": "simulator",
+      "app": "ios"
+    },
+    "android": {
+      "device": "emulator",
+      "app": "android"
+    }
+  }
+}

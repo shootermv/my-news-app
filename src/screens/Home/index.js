@@ -23,7 +23,7 @@ export default ({ navigation }) => {
 
   return (
     <ColorCenter>
-      <Heading marginTop="4">Categories</Heading>
+      <Heading marginTop="4" data-testID="welcome">Categories</Heading>
       <FlatList
         data={categories}
         renderItem={renderItem}
