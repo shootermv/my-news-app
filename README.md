@@ -48,7 +48,7 @@ run the project on your device
 
 1. basic - for functionality built as simple and quick as possible
 2. react-query - code is shorter and accurate
-3. native-base - totaly different and more beutifull UI
+3. native-base - totaly different and more beautifull UI
 
 ### More Features
 
