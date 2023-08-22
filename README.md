@@ -16,7 +16,7 @@ This project purpose was a tech assignment for one of companies i applyed to
 - React-Native - because it is cool (and also it was a requirement)
 - Expo - because i wanted to play with this interesting tool
 - Yarn - because of popular song "forever yarn"
-- react-query - because it makes code much shorter and readable
+- [react-query](https://tanstack.com/query/v3/) - because it makes code much shorter and readable
 
 ### Installation
 
@@ -48,7 +48,7 @@ run the project on your device
 
 1. basic - for functionality built as simple and quick as possible
 2. react-query - code is shorter and accurate
-3. native-base - totaly different and more beutifull UI
+3. native-base - totaly different and more beautifull UI
 
 ### More Features
 
