@@ -29,25 +29,7 @@ import FavoritesScreen from "./screens/Favorites";
 import ColorToggle from "./components/ColorToggle";
 
 const Drawer = createDrawerNavigator();
-/*
-function Component(props) {
-  return (
-    <HStack alignItems="center" mt={6}>
-      <Pressable
-        onPress={() => props.navigation.toggleDrawer()}
-        position="absolute"
-        ml={2}
-        zIndex={1}
-      >
-        <HamburgerIcon ml={2} size="sm" />
-      </Pressable>
-      <Center flex={1}>
-        <Heading size="md">{props.route.name}</Heading>
-      </Center>
-    </HStack>
-  );
-}
-*/
+
 const getIcon = (screenName) => {
   switch (screenName) {
     case "Home":
